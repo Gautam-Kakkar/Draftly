@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
 
+const API_URL = import.meta.env.VITE_API_URL || '';
+
 const PERSONAS = ['storyteller', 'data', 'advisor'];
 
 const TONES = [
@@ -118,7 +120,7 @@ function App() {
     // Generate all 3 concurrently
     const promises = PERSONAS.map(async (persona) => {
       try {
-        const response = await fetch('http://localhost:3001/generate', {
+        const response = await fetch(`${API_URL}/generate`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ content: input, persona, tone, length, emojiLevel })
@@ -174,7 +176,7 @@ function App() {
     setLoading((prev) => ({ ...prev, [persona]: true }));
 
     try {
-      const response = await fetch('http://localhost:3001/generate', {
+      const response = await fetch(`${API_URL}/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: input, persona, tone, length, emojiLevel })
