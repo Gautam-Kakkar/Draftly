@@ -99,6 +99,8 @@ const errorMessages = {
 // Routes
 app.post('/generate', async (req, res) => {
   try {
+    console.log('Received generate request:', { persona: req.body.persona, tone: req.body.tone });
+    
     const { content, persona = 'storyteller', tone = 'professional', length = 'medium', emojiLevel = 'medium' } = req.body;
 
     // Validation
@@ -108,16 +110,20 @@ app.post('/generate', async (req, res) => {
 
     // Sanitize input
     const sanitizedContent = sanitizeInput(content);
+    console.log('Content sanitized, length:', sanitizedContent.length);
 
     // Build prompt
     const prompt = buildPrompt({ content: sanitizedContent, persona, tone, length, emojiLevel });
+    console.log('Prompt built, calling OpenRouter...');
 
     // Call OpenRouter with retry logic
     const output = await generateContent(prompt);
+    console.log('OpenRouter response received, length:', output?.length);
 
     res.json({ output });
   } catch (error) {
     console.error('Error generating:', error.message);
+    console.error('Full error:', error);
 
     // Return appropriate error message
     let statusCode = 500;
@@ -142,12 +148,11 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Only listen if this file is run directly (not when imported)
-if (import.meta.url === `file://${process.argv[1]}`) {
-  app.listen(PORT, () => {
-    console.log(`Draftly API running on http://localhost:${PORT}`);
-    console.log(`Rate limit: ${RATE_LIMIT.maxRequests} requests per ${RATE_LIMIT.windowMs / 1000} seconds`);
-  });
-}
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Draftly API running on http://localhost:${PORT}`);
+  console.log(`Rate limit: ${RATE_LIMIT.maxRequests} requests per ${RATE_LIMIT.windowMs / 1000} seconds`);
+  console.log(`Environment check - API Key present: ${!!process.env.OPENROUTER_API_KEY}`);
+});
 
 export default app;
