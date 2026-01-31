@@ -8,7 +8,8 @@
     "dev:client": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "vercel-build": "vite build"
   },
   "dependencies": {
     "express": "^4.18.2",

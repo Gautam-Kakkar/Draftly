@@ -148,11 +148,14 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Draftly API running on http://localhost:${PORT}`);
-  console.log(`Rate limit: ${RATE_LIMIT.maxRequests} requests per ${RATE_LIMIT.windowMs / 1000} seconds`);
-  console.log(`Environment check - API Key present: ${!!process.env.OPENROUTER_API_KEY}`);
-});
+// Start the server in development
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Draftly API running on http://localhost:${PORT}`);
+    console.log(`Rate limit: ${RATE_LIMIT.maxRequests} requests per ${RATE_LIMIT.windowMs / 1000} seconds`);
+    console.log(`Environment check - API Key present: ${!!process.env.OPENROUTER_API_KEY}`);
+  });
+}
 
+// Export for Vercel serverless
 export default app;
