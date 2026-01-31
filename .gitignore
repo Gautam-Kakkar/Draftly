@@ -44,3 +44,15 @@ coverage/
 .cache/
 .temp/
 .tmp/
+
+# Images in root (use public/ folder instead)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+!public/*.png
+!public/*.jpg
+!public/*.jpeg
+!public/*.gif
+!public/*.svg

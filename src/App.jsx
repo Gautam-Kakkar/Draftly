@@ -205,9 +205,7 @@ function App() {
       <header className="header">
         <div className="header-left">
           <div className="header-logo">
-            <svg className="icon" style={{ width: '24px', height: '24px' }} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" clipRule="evenodd"/>
-            </svg>
+            <img src="/Gemini_Generated_Image_h3r4ush3r4ush3r4-removebg-preview.png" alt="Draftly Logo" className="logo-image" />
           </div>
           <h1>Draftly</h1>
         </div>
