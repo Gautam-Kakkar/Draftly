@@ -43,7 +43,7 @@ export async function generateContent(prompt) {
       return await axios.post(
         OPENROUTER_API_URL,
         {
-          model: 'z-ai/glm-4.5-air:free',
+          model: 'google/gemini-2.5-flash-lite',
           messages: [
             {
               role: 'user',
@@ -55,7 +55,7 @@ export async function generateContent(prompt) {
           headers: {
             'Authorization': `Bearer ${apiKey}`,
             'Content-Type': 'application/json',
-            'HTTP-Referer': 'http://localhost:3000',
+            'HTTP-Referer': process.env.SITE_URL || 'https://draftly.gautamkakkar.live',
             'X-Title': 'Ghostwriter'
           },
           timeout: 30000 // 30 second timeout
