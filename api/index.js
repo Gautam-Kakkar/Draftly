@@ -142,7 +142,12 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-app.listen(PORT, () => {
-  console.log(`Draftly API running on http://localhost:${PORT}`);
-  console.log(`Rate limit: ${RATE_LIMIT.maxRequests} requests per ${RATE_LIMIT.windowMs / 1000} seconds`);
-});
+// Only listen if this file is run directly (not when imported)
+if (import.meta.url === `file://${process.argv[1]}`) {
+  app.listen(PORT, () => {
+    console.log(`Draftly API running on http://localhost:${PORT}`);
+    console.log(`Rate limit: ${RATE_LIMIT.maxRequests} requests per ${RATE_LIMIT.windowMs / 1000} seconds`);
+  });
+}
+
+export default app;
