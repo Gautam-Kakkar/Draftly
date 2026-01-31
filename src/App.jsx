@@ -205,7 +205,7 @@ function App() {
       <header className="header">
         <div className="header-left">
           <div className="header-logo">
-            <img src="/Gemini_Generated_Image_h3r4ush3r4ush3r4-removebg-preview.png" alt="Draftly Logo" className="logo-image" />
+            <img src="/logo.png" alt="Draftly Logo" className="logo-image" />
           </div>
           <h1>Draftly</h1>
         </div>
