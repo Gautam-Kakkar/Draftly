@@ -43,7 +43,7 @@ export async function generateContent(prompt) {
       return await axios.post(
         OPENROUTER_API_URL,
         {
-          model: 'google/gemini-2.5-flash-lite',
+          model: 'z-ai/glm-4.5-air:free',
           messages: [
             {
               role: 'user',
